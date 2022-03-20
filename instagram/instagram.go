@@ -16,7 +16,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/kecci/goscraper"
+	goscraper "github.com/kecci/go-scraper"
 )
 
 // GetAccountByUsername try to find account by username.

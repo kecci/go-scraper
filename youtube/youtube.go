@@ -7,7 +7,7 @@ import (
 	"log"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/kecci/goscraper"
+	goscraper "github.com/kecci/go-scraper"
 	"google.golang.org/api/option"
 	"google.golang.org/api/youtube/v3"
 )

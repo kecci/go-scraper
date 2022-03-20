@@ -1,4 +1,4 @@
-module github.com/kecci/goscraper
+module github.com/kecci/go-scraper
 
 go 1.17
 

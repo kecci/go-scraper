@@ -1,6 +1,6 @@
 package main
 
-import "github.com/kecci/goscraper/youtube"
+import "github.com/kecci/go-scraper/youtube"
 
 func main() {
 	service := youtube.GetYoutubeSerice("AIzaSyAxRRlCIJvGPDZjyWAuoxzLKQsv5B3o-Ck")

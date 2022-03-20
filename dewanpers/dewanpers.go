@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/kecci/goscraper"
+	goscraper "github.com/kecci/go-scraper"
 )
 
 const (

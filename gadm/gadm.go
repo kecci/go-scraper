@@ -3,7 +3,7 @@ package gadm
 import (
 	"encoding/json"
 
-	"github.com/kecci/goscraper"
+	goscraper "github.com/kecci/go-scraper"
 )
 
 const (

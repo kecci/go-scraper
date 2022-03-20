@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/kecci/goscraper"
+	"github.com/kecci/go-scraper"
 )
 
 type AreaModel struct {

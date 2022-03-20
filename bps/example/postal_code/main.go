@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/kecci/goscraper/bps"
+	"github.com/kecci/go-scraper/bps"
 )
 
 func main() {

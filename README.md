@@ -5,7 +5,7 @@ Go library to scrap or get dataset.
 ## Example
 Installation:
 ```sh
-go get github.com/kecci/goscraper/bps
+go get github.com/kecci/go-scraper/bps
 ```
 
 Implementation:
@@ -16,7 +16,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/kecci/goscraper/bps"
+	"github.com/kecci/go-scraper/bps"
 )
 
 func main() {
