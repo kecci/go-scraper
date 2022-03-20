@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/kecci/go-scraper/instagram"
+	"github.com/kecci/goscraper/instagram"
 )
 
 func main() {

@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+
+	"github.com/kecci/goscraper"
 )
 
 type AreaModel struct {
@@ -68,7 +70,7 @@ func SearchArea(search string) ([]SearchModel, error) {
 	// search should be uppercase
 	search = strings.ToUpper(search)
 
-	data, err := getDataFromURL(fmt.Sprintf(bps_search_area, search))
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(bps_search_area, search))
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +86,7 @@ func SearchArea(search string) ([]SearchModel, error) {
 
 // GetProvinces get all provinces
 func GetProvinces() ([]AreaModel, error) {
-	data, err := getDataFromURL(bps_bridging_url)
+	data, err := goscraper.GetDataFromURL(bps_bridging_url)
 	if err != nil {
 		return nil, err
 	}
@@ -98,9 +100,9 @@ func GetProvinces() ([]AreaModel, error) {
 	return areas, nil
 }
 
-// GetRegencies get all regencies by province id (kode_bps)
-func GetRegencies(provinceId string) ([]AreaModel, error) {
-	data, err := getDataFromURL(fmt.Sprintf(bps_regency_url, provinceId))
+// GetRegenciesByProvinceId get all regencies by province id (kode_bps)
+func GetRegenciesByProvinceId(provinceId string) ([]AreaModel, error) {
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(bps_regency_url, provinceId))
 	if err != nil {
 		return nil, err
 	}
@@ -114,9 +116,9 @@ func GetRegencies(provinceId string) ([]AreaModel, error) {
 	return areas, nil
 }
 
-// GetDistricts get all districts by regency id (kode_bps)
-func GetDistricts(regencyId string) ([]AreaModel, error) {
-	data, err := getDataFromURL(fmt.Sprintf(bps_district_url, regencyId))
+// GetDistrictsByRegencyId get all districts by regency id (kode_bps)
+func GetDistrictsByRegencyId(regencyId string) ([]AreaModel, error) {
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(bps_district_url, regencyId))
 	if err != nil {
 		return nil, err
 	}
@@ -130,9 +132,9 @@ func GetDistricts(regencyId string) ([]AreaModel, error) {
 	return areas, nil
 }
 
-// GetVillages get all villages by district id (kode_bps)
-func GetVillages(districtId string) ([]AreaModel, error) {
-	data, err := getDataFromURL(fmt.Sprintf(bps_village_url, districtId))
+// GetVillagesByDistrictId get all villages by district id (kode_bps)
+func GetVillagesByDistrictId(districtId string) ([]AreaModel, error) {
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(bps_village_url, districtId))
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +150,7 @@ func GetVillages(districtId string) ([]AreaModel, error) {
 
 // GetProvincePostalCode get all province postal code
 func GetPostalCodeProvinces() ([]PostalCodeModel, error) {
-	data, err := getDataFromURL(province_postal_code)
+	data, err := goscraper.GetDataFromURL(province_postal_code)
 	if err != nil {
 		return nil, err
 	}
@@ -163,8 +165,8 @@ func GetPostalCodeProvinces() ([]PostalCodeModel, error) {
 }
 
 // GetRegencyPostalCode get all regency postal code by province id (kode_bps)
-func GetPostalCodeRegencies(provinceId string) ([]PostalCodeModel, error) {
-	data, err := getDataFromURL(fmt.Sprintf(regency_postal_code, provinceId))
+func GetPostalCodeRegenciesByProvinceId(provinceId string) ([]PostalCodeModel, error) {
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(regency_postal_code, provinceId))
 	if err != nil {
 		return nil, err
 	}
@@ -179,8 +181,8 @@ func GetPostalCodeRegencies(provinceId string) ([]PostalCodeModel, error) {
 }
 
 // GetDistrictPostalCode get all district postal code by regency id (kode_bps)
-func GetPostalCodeDistricts(regencyId string) ([]PostalCodeModel, error) {
-	data, err := getDataFromURL(fmt.Sprintf(district_postal_code, regencyId))
+func GetPostalCodeDistrictsByRegencyId(regencyId string) ([]PostalCodeModel, error) {
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(district_postal_code, regencyId))
 	if err != nil {
 		return nil, err
 	}
@@ -195,8 +197,8 @@ func GetPostalCodeDistricts(regencyId string) ([]PostalCodeModel, error) {
 }
 
 // GetVillagePostalCode get all village postal code by district id (kode_bps)
-func GetPostalCodeVillages(districtId string) ([]PostalCodeModel, error) {
-	data, err := getDataFromURL(fmt.Sprintf(village_postal_code, districtId))
+func GetPostalCodeVillagesByDistrictId(districtId string) ([]PostalCodeModel, error) {
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(village_postal_code, districtId))
 	if err != nil {
 		return nil, err
 	}
@@ -212,7 +214,7 @@ func GetPostalCodeVillages(districtId string) ([]PostalCodeModel, error) {
 
 // GetProvincesHistoris get all provinces historis
 func GetHistorisProvinces() ([]map[string]string, error) {
-	data, err := getDataFromURL(province_historis_url)
+	data, err := goscraper.GetDataFromURL(province_historis_url)
 	if err != nil {
 		return nil, err
 	}
@@ -227,8 +229,8 @@ func GetHistorisProvinces() ([]map[string]string, error) {
 }
 
 // GetRegenciesHistoris get all regencies historis by province id (kode_bps)
-func GetHistorisRegencies(provinceId string) ([]map[string]string, error) {
-	data, err := getDataFromURL(fmt.Sprintf(regency_historis_url, provinceId))
+func GetHistorisRegenciesByProvinceId(provinceId string) ([]map[string]string, error) {
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(regency_historis_url, provinceId))
 	if err != nil {
 		return nil, err
 	}
@@ -243,8 +245,8 @@ func GetHistorisRegencies(provinceId string) ([]map[string]string, error) {
 }
 
 // GetDistrictsHistoris get all districts historis by regency id (kode_bps)
-func GetHistorisDistricts(regencyId string) ([]map[string]string, error) {
-	data, err := getDataFromURL(fmt.Sprintf(district_historis_url, regencyId))
+func GetHistorisDistrictsByRegencyId(regencyId string) ([]map[string]string, error) {
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(district_historis_url, regencyId))
 	if err != nil {
 		return nil, err
 	}
@@ -259,8 +261,8 @@ func GetHistorisDistricts(regencyId string) ([]map[string]string, error) {
 }
 
 // GetVillagesHistoris get all villages historis by district id (kode_bps)
-func GetHistorisVillages(districtId string) ([]map[string]string, error) {
-	data, err := getDataFromURL(fmt.Sprintf(village_historis_url, districtId))
+func GetHistorisVillagesByDistrictId(districtId string) ([]map[string]string, error) {
+	data, err := goscraper.GetDataFromURL(fmt.Sprintf(village_historis_url, districtId))
 	if err != nil {
 		return nil, err
 	}

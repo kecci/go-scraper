@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/kecci/goscraper"
 )
 
 const (
@@ -37,13 +38,13 @@ type VillageModel struct {
 	Subdistrict SubdistrictModel `json:"subdistrict"`
 	VillageName string           `json:"village_name"`
 	VillageURL  string           `json:"village_url"`
-	ZipCode     string           `json:"zip_code"`
+	PostalCode  string           `json:"postal_code"`
 }
 
 // GetProvinces to scrapping Province data from kemebdikbud.go.id
 func GetProvinces() (provinces []ProvinceModel) {
 	// PROVINCE
-	res, err := getDataFromURL(kemdikbud_province_url)
+	res, err := goscraper.GetDataFromURL(kemdikbud_province_url)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -68,7 +69,7 @@ func GetProvinces() (provinces []ProvinceModel) {
 // GetDistricts to scrapping District data from kemebdikbud.go.id
 func GetDistricts(province ProvinceModel) (districts []DistrictModel) {
 	// DISTRICT
-	res, err := getDataFromURL(province.ProvinceURL)
+	res, err := goscraper.GetDataFromURL(province.ProvinceURL)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -96,7 +97,7 @@ func GetDistricts(province ProvinceModel) (districts []DistrictModel) {
 
 // GetSubdistricts to scrapping Subdistrict data from kemebdikbud.go.id
 func GetSubdistricts(district DistrictModel) (subdistricts []SubdistrictModel) {
-	res, err := getDataFromURL(district.DistrictURL)
+	res, err := goscraper.GetDataFromURL(district.DistrictURL)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -125,7 +126,7 @@ func GetSubdistricts(district DistrictModel) (subdistricts []SubdistrictModel) {
 
 // GetVillages to scrapping Village data from kemebdikbud.go.id
 func GetVillages(subdistrict SubdistrictModel) (villages []VillageModel) {
-	res, err := getDataFromURL(subdistrict.SubdistrictURL)
+	res, err := goscraper.GetDataFromURL(subdistrict.SubdistrictURL)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -145,22 +146,22 @@ func GetVillages(subdistrict SubdistrictModel) (villages []VillageModel) {
 		village.VillageURL = kemdikbud_host + "/" + village.VillageURL
 
 		if strings.Contains(village.VillageURL, "tabs.php?npsn=") {
-			// ZipCode
-			res, err = getDataFromURL(village.VillageURL)
+			// PostalCode
+			res, err = goscraper.GetDataFromURL(village.VillageURL)
 			if err != nil {
 				log.Fatal(err)
 			}
 
-			docZip, err := goquery.NewDocumentFromReader(bytes.NewBuffer(res))
+			docPostalCode, err := goquery.NewDocumentFromReader(bytes.NewBuffer(res))
 			if err != nil {
 				log.Fatal(err)
 			}
-			docZip.Find("#tabs-1").Find("table").First().Find("tbody").First().Find("table").First().Find("tbody").First().Children().Each(func(k int, selTbody *goquery.Selection) {
+			docPostalCode.Find("#tabs-1").Find("table").First().Find("tbody").First().Find("table").First().Find("tbody").First().Children().Each(func(k int, selTbody *goquery.Selection) {
 				if k == 3 {
 					selTbody.Find("td").First().Remove()
 					selTbody.Find("td").First().Remove()
 					selTbody.Find("td").First().Remove()
-					village.ZipCode = selTbody.Find("td").First().Text()
+					village.PostalCode = selTbody.Find("td").First().Text()
 				}
 				if k == 5 {
 					selTbody.Find("td").First().Remove()

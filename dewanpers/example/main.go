@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/kecci/go-scraper/dewanpers"
+	"github.com/kecci/goscraper/dewanpers"
 )
 
 func main() {

@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/kecci/go-scraper/bps"
+	"github.com/kecci/goscraper/bps"
 )
 
 func main() {
@@ -25,7 +25,7 @@ func main() {
 	log.Println(string(b))
 
 	log.Println("################## BPS Postal Code Regency Data: ##################")
-	postalRes, err = bps.GetPostalCodeRegencies(postalRes[0].KodeBps)
+	postalRes, err = bps.GetPostalCodeRegenciesByProvinceId(postalRes[0].KodeBps)
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -33,7 +33,7 @@ func main() {
 	log.Println(string(b))
 
 	log.Println("################## BPS Postal Code District Data: ##################")
-	postalRes, err = bps.GetPostalCodeDistricts(postalRes[0].KodeBps)
+	postalRes, err = bps.GetPostalCodeDistrictsByRegencyId(postalRes[0].KodeBps)
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -41,7 +41,7 @@ func main() {
 	log.Println(string(b))
 
 	log.Println("################## BPS Postal Code Village Data: ##################")
-	postalRes, err = bps.GetPostalCodeVillages(postalRes[0].KodeBps)
+	postalRes, err = bps.GetPostalCodeVillagesByDistrictId(postalRes[0].KodeBps)
 	if err != nil {
 		log.Println(err.Error())
 	}

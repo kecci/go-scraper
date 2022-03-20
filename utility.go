@@ -1,11 +1,11 @@
-package dewanpers
+package goscraper
 
 import (
 	"io/ioutil"
 	"net/http"
 )
 
-func getDataFromURL(url string) ([]byte, error) {
+func GetDataFromURL(url string) ([]byte, error) {
 	resp, err := http.Get(url)
 	if err != nil || resp.StatusCode == 404 {
 		return nil, err

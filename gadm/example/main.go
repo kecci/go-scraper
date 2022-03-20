@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/kecci/go-scraper/gadm"
+	"github.com/kecci/goscraper/gadm"
 )
 
 func main() {

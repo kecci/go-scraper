@@ -13,16 +13,16 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"strings"
+
+	"github.com/kecci/goscraper"
 )
 
 // GetAccountByUsername try to find account by username.
 func GetAccountByUsername(username string) (Account, error) {
 	url := fmt.Sprintf(accountInfoURL, username)
-	data, err := getDataFromURL(url)
+	data, err := goscraper.GetDataFromURL(url)
 	if err != nil {
 		return Account{}, err
 	}
@@ -46,7 +46,7 @@ func GetMediaByURL(url string) (Media, error) {
 // then code of the media is 12376OtT5o.
 func GetMediaByCode(code string) (Media, error) {
 	url := fmt.Sprintf(mediaInfoURL, code)
-	data, err := getDataFromURL(url)
+	data, err := goscraper.GetDataFromURL(url)
 	if err != nil {
 		return Media{}, err
 	}
@@ -177,7 +177,7 @@ func GetLocationTopMedia(id string) ([9]Media, error) {
 // The id is a facebook location id.
 func GetLocationByID(id string) (Location, error) {
 	url := fmt.Sprintf(locationURL, id, "")
-	data, err := getDataFromURL(url)
+	data, err := goscraper.GetDataFromURL(url)
 	if err != nil {
 		return Location{}, err
 	}
@@ -256,7 +256,7 @@ func GetTagTopMedia(tag string) ([9]Media, error) {
 // Return slice of Account with length of 0 or more.
 func SearchForUsers(username string) ([]Account, error) {
 	url := fmt.Sprintf(searchURL, username)
-	data, err := getDataFromURL(url)
+	data, err := goscraper.GetDataFromURL(url)
 	if err != nil {
 		return nil, err
 	}
@@ -268,7 +268,7 @@ func SearchForUsers(username string) ([]Account, error) {
 }
 
 func getJSONFromURL(url string) (map[string]interface{}, error) {
-	data, err := getDataFromURL(url)
+	data, err := goscraper.GetDataFromURL(url)
 	if err != nil {
 		log.Println("getJSONFromURL", "getDataFromURL", err.Error())
 		return nil, err
@@ -287,19 +287,4 @@ func getJSONFromURL(url string) (map[string]interface{}, error) {
 	}
 
 	return jsonBody, nil
-}
-
-func getDataFromURL(url string) ([]byte, error) {
-	resp, err := http.Get(url)
-	if err != nil || resp.StatusCode == 404 {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	return body, nil
 }

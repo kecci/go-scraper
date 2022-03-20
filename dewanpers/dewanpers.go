@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/kecci/goscraper"
 )
 
 const (
@@ -29,7 +30,7 @@ type MediaModel struct {
 }
 
 func GetMedia(page int) ([]MediaModel, error) {
-	res, err := getDataFromURL(fmt.Sprintf(dewanpers_media_url, page))
+	res, err := goscraper.GetDataFromURL(fmt.Sprintf(dewanpers_media_url, page))
 	if err != nil {
 		return nil, err
 	}

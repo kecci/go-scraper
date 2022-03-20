@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/kecci/go-scraper/kemendagri"
+	"github.com/kecci/goscraper/kemendagri"
 )
 
 func main() {

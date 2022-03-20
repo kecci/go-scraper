@@ -1,6 +1,10 @@
 package gadm
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/kecci/goscraper"
+)
 
 const (
 	geojson_regency_url = "https://raw.githubusercontent.com/rifani/geojson-political-indonesia/master/IDN_adm_2_kabkota.json"
@@ -40,7 +44,7 @@ type GeojsonModel struct {
 
 func GetGeojsonRegencies() (*GeojsonModel, error) {
 	geojson := GeojsonModel{}
-	res, err := getDataFromURL(geojson_regency_url)
+	res, err := goscraper.GetDataFromURL(geojson_regency_url)
 	if err != nil {
 		return nil, err
 	}

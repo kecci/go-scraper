@@ -5,7 +5,7 @@ Go library to scrap or get dataset.
 ## Example
 Installation:
 ```sh
-go get github.com/kecci/go-scraper/bps
+go get github.com/kecci/goscraper/bps
 ```
 
 Implementation:
@@ -16,7 +16,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/kecci/go-scraper/bps"
+	"github.com/kecci/goscraper/bps"
 )
 
 func main() {
@@ -45,3 +45,4 @@ Result:
 | 4 | dewanpers | government | news portal, media, redaction, radio | Web Scraping | https://dewanpers.or.id/ |
 | 5 | gadm | organization | geojson | JSON | https://gadm.org/ |
 | 6 | instagram | social  media | profile, post | REST API | https://www.instagram.com/ |
+| 7 | youtube | social  media | profile, post | REST API | https://www.youtube.com/ |
